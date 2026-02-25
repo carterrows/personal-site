@@ -1,0 +1,22 @@
+{
+  "name": "personal-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0 --port 4321",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 4321",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/node": "latest",
+    "@astrojs/tailwind": "latest",
+    "astro": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "postcss": "latest"
+  }
+}

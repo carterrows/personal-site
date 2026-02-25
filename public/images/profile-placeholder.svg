@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title>Profile Placeholder</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#164e63" />
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)" />
+  <circle cx="128" cy="92" r="46" fill="#67e8f9" />
+  <rect x="56" y="152" width="144" height="64" rx="32" fill="#22d3ee" />
+</svg>

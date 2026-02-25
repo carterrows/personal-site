@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Your Name | Personal Site">
+  <section id="home" class="scroll-mt-24 space-y-4">
+    <p class="text-sm uppercase tracking-wider text-cyan-300">Personal Site</p>
+    <h1 class="text-4xl font-bold md:text-5xl">Hi, I'm Your Name.</h1>
+    <p class="max-w-2xl text-slate-300">
+      Replace this with a short introduction. This scaffold is intentionally minimal so we can iterate
+      on final content and styling next.
+    </p>
+  </section>
+
+  <section id="about" class="scroll-mt-24 space-y-4">
+    <h2 class="text-2xl font-semibold">About</h2>
+    <p class="text-slate-300">
+      Add your bio, interests, background, and anything else you want people to know.
+    </p>
+    <img
+      class="h-40 w-40 rounded-xl border border-slate-700 object-cover"
+      src="/images/profile-placeholder.svg"
+      alt="Profile placeholder"
+    />
+  </section>
+
+  <section id="projects" class="scroll-mt-24 space-y-4">
+    <h2 class="text-2xl font-semibold">Projects</h2>
+    <p class="text-slate-300">
+      This section can later list projects, links, screenshots, or GitHub repositories.
+    </p>
+  </section>
+
+  <section id="contact" class="scroll-mt-24 space-y-4">
+    <h2 class="text-2xl font-semibold">Contact</h2>
+    <p class="text-slate-300">Add your preferred contact methods and social links here.</p>
+  </section>
+</BaseLayout>

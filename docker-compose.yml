@@ -1,0 +1,9 @@
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: personal-site
+    restart: unless-stopped
+    ports:
+      - "4321:4321"
