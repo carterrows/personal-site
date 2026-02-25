@@ -5,6 +5,7 @@ RUN npm ci
 
 FROM node:24.13.1-alpine AS builder
 WORKDIR /app
+ENV ASTRO_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
@@ -12,6 +13,7 @@ RUN npm run build
 FROM node:24.13.1-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+ENV ASTRO_TELEMETRY_DISABLED=1
 COPY package.json package-lock.json ./
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm prune --omit=dev
