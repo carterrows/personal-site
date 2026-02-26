@@ -198,6 +198,28 @@ body::after {
     @apply text-lg font-semibold;
   }
 
+  .work-head {
+    @apply flex items-start gap-4;
+  }
+
+  .work-logo {
+    @apply block shrink-0 object-contain;
+    width: 4.25rem;
+    height: 3rem;
+  }
+
+  .work-role {
+    @apply mt-1 text-sm;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+  }
+
+  .work-meta {
+    @apply text-xs sm:text-sm;
+    color: color-mix(in srgb, var(--ink), white 35%);
+    font-family: var(--font-body);
+  }
+
   .link-row {
     @apply flex flex-wrap items-center gap-4;
   }
