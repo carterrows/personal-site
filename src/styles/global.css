@@ -1,13 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  --bg: #f8f4e8;
+  --bg-soft: #fcf9ef;
+  --ink: #06402b;
+  --ink-soft: #2f5c4b;
+  --line: rgba(6, 64, 43, 0.2);
+  --surface: #f8f4e8;
+  --chip: #e9f0ea;
+  --font-body: "Inter", "Avenir Next", "Segoe UI", sans-serif;
+  --font-blurb: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-heading: "Source Serif 4", Georgia, serif;
 }
 
 html,
 body {
   margin: 0;
   min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--ink);
+  font-family: var(--font-body);
+  scroll-snap-type: y mandatory;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% -8%, rgba(6, 64, 43, 0.2), transparent 38%),
+    radial-gradient(circle at 88% 100%, rgba(6, 64, 43, 0.12), transparent 40%),
+    linear-gradient(180deg, var(--bg-soft), var(--bg));
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.32;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(6, 64, 43, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(6, 64, 43, 0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@layer components {
+  .top-link {
+    @apply inline-block px-2 py-1;
+    color: color-mix(in srgb, var(--ink), white 28%);
+    border-bottom: 2px solid transparent;
+    transition:
+      color 180ms ease,
+      border-bottom-color 220ms ease;
+  }
+
+  .top-link:hover,
+  .top-link:focus-visible {
+    @apply outline-none;
+    color: var(--ink);
+  }
+
+  .top-link.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  .resume-link {
+    @apply rounded-md px-2 py-1 transition-colors;
+    color: var(--ink);
+  }
+
+  .resume-link:hover,
+  .resume-link:focus-visible {
+    @apply outline-none;
+    background: rgba(6, 64, 43, 0.12);
+  }
+
+  .dot-nav {
+    @apply fixed right-3 top-1/2 z-40 flex -translate-y-1/2 flex-col gap-3 sm:right-6;
+  }
+
+  .dot-link {
+    @apply block h-2.5 w-2.5 rounded-full transition-colors;
+    background: rgba(6, 64, 43, 0.24);
+  }
+
+  .dot-link:hover,
+  .dot-link:focus-visible,
+  .dot-link.is-active {
+    @apply outline-none;
+  }
+
+  .dot-link.is-active {
+    background: var(--ink);
+  }
+
+  .section-panel {
+    @apply flex items-center border-b border-[color:var(--line)] py-12;
+    min-height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding-top: 7rem;
+  }
+
+  .section-shell {
+    @apply max-w-3xl space-y-6;
+  }
+
+  .about-shell {
+    @apply max-w-5xl items-center gap-10 space-y-0 md:flex md:justify-between;
+  }
+
+  .about-copy {
+    @apply space-y-6;
+  }
+
+  .section-index {
+    @apply text-xs font-semibold uppercase tracking-[0.3em];
+    color: color-mix(in srgb, var(--ink), white 45%);
+  }
+
+  .section-title {
+    @apply max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-sm leading-relaxed sm:text-base;
+    font-family: var(--font-blurb);
+    color: var(--ink-soft);
+  }
+
+  .about-photo-frame {
+    @apply inline-flex items-center justify-center;
+    width: 16rem;
+    height: 16rem;
+    border-radius: 999px;
+    padding: 0.35rem;
+    border: 1px solid rgba(6, 64, 43, 0.28);
+    background: linear-gradient(
+      145deg,
+      rgba(6, 64, 43, 0.1),
+      rgba(255, 255, 255, 0.56)
+    );
+    box-shadow:
+      0 8px 22px rgba(6, 64, 43, 0.12),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  }
+
+  .about-photo {
+    @apply block h-full w-full rounded-full object-cover;
+    border: 2px solid rgba(6, 64, 43, 0.18);
+  }
+
+  .chip-grid {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .chip {
+    @apply rounded-md px-3 py-1 text-xs font-medium uppercase tracking-[0.16em] sm:text-sm;
+    background: var(--chip);
+    border: 1px solid rgba(6, 64, 43, 0.22);
+  }
+
+  .card-stack {
+    @apply grid gap-3 sm:grid-cols-2;
+  }
+
+  .info-card {
+    @apply space-y-3 rounded-lg p-5;
+    background: rgba(255, 255, 255, 0.46);
+    border: 1px solid rgba(6, 64, 43, 0.18);
+  }
+
+  .card-title {
+    @apply text-lg font-semibold;
+  }
+
+  .link-row {
+    @apply flex flex-wrap items-center gap-4;
+  }
+
+  .icon-link {
+    @apply inline-flex items-center justify-center transition;
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .icon-link:hover,
+  .icon-link:focus-visible {
+    @apply outline-none;
+    opacity: 0.7;
+    transform: translateY(-1px);
+  }
+
+  .contact-icon {
+    @apply block;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
