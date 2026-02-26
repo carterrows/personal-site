@@ -8,6 +8,41 @@ const sections = [
   { id: "work", label: "Work", index: "04" },
   { id: "contact", label: "Contact", index: "05" }
 ];
+
+const projects = [
+  {
+    title: "Personal Website",
+    description:
+      "Built with Astro and Tailwind to showcase projects, experience, and contact details in a fast, responsive portfolio.",
+    media: "/projects/personal-website.png",
+    alt: "Screenshot of the personal website project",
+    github: "https://github.com/carterrows/personal-site"
+  },
+  {
+    title: "Budget Tool",
+    description:
+      "Self-hosted budgeting app with secure authentication, multi-plan workflows, autosave, and monthly cash-flow projections.",
+    media: "/projects/budget-tool.gif",
+    alt: "Demo of the budget tool project",
+    github: "https://github.com/carterrows/budget-tool"
+  },
+  {
+    title: "Sweetside Website",
+    description:
+      "Responsive site for a local band with reusable UI components and a JSON-driven content system for shows, media, and member info.",
+    media: "/projects/sweetside-website.gif",
+    alt: "Demo of the Sweetside website project",
+    github: "https://github.com/carterrows/sweetsideband-site"
+  },
+  {
+    title: "RPI Stats",
+    description:
+      "Lightweight FastAPI and Tailwind dashboard for live Raspberry Pi CPU temperature and fan monitoring with on-demand polling.",
+    media: "/projects/rpi-stats.png",
+    alt: "Screenshot of the RPI stats dashboard project",
+    github: "https://github.com/carterrows/rpi-stats"
+  }
+];
 ---
 
 <BaseLayout title="Carter Rows | Technology Analyst" name="Carter Rows">
@@ -75,44 +110,47 @@ const sections = [
     <div class="section-shell">
       <p class="section-index">{sections[2].index}</p>
       <h2 class="section-title">Projects</h2>
-      <div class="card-stack">
-        <article class="info-card">
-          <h3 class="card-title">Personal Website (This One)</h3>
-          <p class="section-copy">February 2026</p>
-          <ul class="section-copy list-disc pl-5">
-            <li>Built a personal portfolio site with Astro and Tailwind to showcase my work and experience.</li>
-            <li>Implemented section-aware navigation with smooth scroll snapping and active-state syncing across top and dot navigation.</li>
-            <li>Structured the app with reusable Astro layouts, an API-backed resume route with rate limiting, and responsive component styling.</li>
-          </ul>
-        </article>
-        <article class="info-card">
-          <h3 class="card-title">Budget Tool</h3>
-          <p class="section-copy">February 2026</p>
-          <ul class="section-copy list-disc pl-5">
-            <li>Built a self-hosted budgeting app with authenticated accounts and server-side sessions.</li>
-            <li>Designed multi-plan budgeting workflows with autosave and monthly cash-flow projections.</li>
-            <li>Strengthened API security with origin and host checks, strict headers, and rate limiting.</li>
-            <li>Containerized deployment using Docker.</li>
-          </ul>
-        </article>
-        <article class="info-card">
-          <h3 class="card-title">Sweetside Band Website</h3>
-          <p class="section-copy">January 2026</p>
-          <ul class="section-copy list-disc pl-5">
-            <li>Built a responsive website for a local band with reusable UI components.</li>
-            <li>Implemented a JSON-driven content system for details, shows, members, and media.</li>
-            <li>Containerized deployment using Docker.</li>
-          </ul>
-        </article>
-        <article class="info-card">
-          <h3 class="card-title">Raspberry Pi CPU Temp and Fan Monitor</h3>
-          <p class="section-copy">December 2025</p>
-          <ul class="section-copy list-disc pl-5">
-            <li>Built a minimal FastAPI and Tailwind web app that displays live Raspberry Pi CPU temperature and fan speed.</li>
-            <li>Implemented on-demand polling so system reads only occur while a user is actively viewing the dashboard.</li>
-            <li>Containerized deployment using Docker, including hardware-aware mounts and device access for vcgencmd and fan telemetry.</li>
-          </ul>
-        </article>
+      <div class="project-carousel" data-project-carousel>
+        <div class="project-frame">
+          <button type="button" class="project-arrow" data-project-prev aria-label="Previous project">
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_back_ios</span>
+          </button>
+          <div class="project-viewport">
+            {
+              projects.map((project, index) => (
+                <article class="project-card" data-project-card hidden={index !== 0}>
+                  <img
+                    class="project-media"
+                    src={project.media}
+                    alt={project.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="project-content">
+                    <h3 class="card-title">{project.title}</h3>
+                    <p class="section-copy project-description">{project.description}</p>
+                    <a
+                      class="project-github"
+                      href={project.github}
+                      rel="noreferrer"
+                      target="_blank"
+                      aria-label={`View ${project.title} on GitHub`}
+                    >
+                      <img class="project-github-icon" src="/icons/github.svg" alt="" loading="lazy" />
+                      <span>GitHub</span>
+                    </a>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+          <button type="button" class="project-arrow" data-project-next aria-label="Next project">
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward_ios</span>
+          </button>
+        </div>
+        <p class="project-progress" data-project-progress>
+          1 / {projects.length}
+        </p>
       </div>
     </div>
   </section>
@@ -188,6 +226,12 @@ const sections = [
 
       const navLinks = Array.from(document.querySelectorAll("[data-nav-target]"));
       const dotLinks = Array.from(document.querySelectorAll("[data-dot-target]"));
+      const projectCards = Array.from(document.querySelectorAll("[data-project-card]")).filter(
+        (card) => card instanceof HTMLElement
+      );
+      const projectPrev = document.querySelector("[data-project-prev]");
+      const projectNext = document.querySelector("[data-project-next]");
+      const projectProgress = document.querySelector("[data-project-progress]");
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       let activeIndex = -1;
       let isAnimating = false;
@@ -195,6 +239,37 @@ const sections = [
       let frame = 0;
       let lockedIndex = null;
       let lockReleaseTimer = 0;
+      let activeProjectIndex = 0;
+
+      const setActiveProject = (index) => {
+        if (projectCards.length === 0) return;
+        activeProjectIndex = (index + projectCards.length) % projectCards.length;
+
+        projectCards.forEach((card, cardIndex) => {
+          const isActive = cardIndex === activeProjectIndex;
+          card.toggleAttribute("hidden", !isActive);
+        });
+
+        if (projectProgress instanceof HTMLElement) {
+          projectProgress.textContent = `${activeProjectIndex + 1} / ${projectCards.length}`;
+        }
+      };
+
+      if (projectCards.length > 0) {
+        setActiveProject(0);
+
+        if (projectPrev instanceof HTMLElement) {
+          projectPrev.addEventListener("click", () => {
+            setActiveProject(activeProjectIndex - 1);
+          });
+        }
+
+        if (projectNext instanceof HTMLElement) {
+          projectNext.addEventListener("click", () => {
+            setActiveProject(activeProjectIndex + 1);
+          });
+        }
+      }
 
       const getActiveSectionIndex = () => {
         const viewportCenter = window.innerHeight * 0.5;

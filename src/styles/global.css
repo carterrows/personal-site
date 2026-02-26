@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,6 +39,14 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 body::before {
@@ -126,7 +133,7 @@ body::after {
   }
 
   .section-shell {
-    @apply max-w-3xl space-y-6;
+    @apply mx-auto max-w-3xl space-y-6;
   }
 
   .about-shell {
@@ -186,6 +193,93 @@ body::after {
 
   .card-stack {
     @apply grid gap-3 sm:grid-cols-2;
+  }
+
+  .project-carousel {
+    @apply space-y-4;
+  }
+
+  .project-frame {
+    @apply grid items-center gap-3;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .project-viewport {
+    @apply min-w-0;
+    width: min(100%, 50rem);
+    margin-inline: auto;
+  }
+
+  .project-card {
+    @apply overflow-hidden rounded-xl;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.52);
+    border: 1px solid rgba(6, 64, 43, 0.2);
+    box-shadow: 0 10px 28px rgba(6, 64, 43, 0.08);
+  }
+
+  .project-media {
+    @apply block w-full object-cover;
+    aspect-ratio: 16 / 10;
+    background: rgba(6, 64, 43, 0.08);
+    border-bottom: 1px solid rgba(6, 64, 43, 0.16);
+  }
+
+  .project-content {
+    @apply space-y-3 p-5;
+  }
+
+  .project-description {
+    @apply max-w-none;
+  }
+
+  .project-github {
+    @apply inline-flex items-center gap-2 text-sm font-semibold transition;
+    color: var(--ink);
+  }
+
+  .project-github:hover,
+  .project-github:focus-visible {
+    @apply outline-none;
+    opacity: 0.72;
+  }
+
+  .project-github-icon {
+    @apply block;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .project-arrow {
+    @apply inline-flex items-center justify-center p-0;
+    flex-shrink: 0;
+    color: var(--ink);
+    border: 0;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .project-arrow .material-symbols-outlined {
+    @apply block;
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .project-arrow[data-project-prev] .material-symbols-outlined {
+    transform: translateX(2px);
+  }
+
+  .project-progress {
+    @apply min-w-[4rem] text-center text-sm;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+  }
+
+  @media (max-width: 640px) {
+    .project-frame {
+      gap: 0.75rem;
+    }
   }
 
   .info-card {
