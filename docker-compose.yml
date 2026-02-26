@@ -5,5 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: personal-site
     restart: unless-stopped
+    environment:
+      HOST: 0.0.0.0
+      PORT: 4321
     ports:
       - "4321:4321"

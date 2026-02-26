@@ -14,6 +14,8 @@ FROM node:24.13.1-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV ASTRO_TELEMETRY_DISABLED=1
+ENV HOST=0.0.0.0
+ENV PORT=4321
 COPY package.json package-lock.json ./
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm prune --omit=dev
