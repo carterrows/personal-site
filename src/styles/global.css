@@ -82,7 +82,6 @@ body::after {
 
   .resume-link {
     @apply rounded-md px-2 py-1 transition-colors;
-    border: 1px solid var(--ink);
     color: var(--ink);
   }
 
