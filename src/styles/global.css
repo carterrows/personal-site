@@ -105,6 +105,53 @@ body::after {
     background: rgba(6, 64, 43, 0.12);
   }
 
+  .mobile-menu-toggle {
+    @apply inline-flex items-center justify-center p-0;
+    color: var(--ink);
+    border: 0;
+    background: transparent;
+    appearance: none;
+  }
+
+  .mobile-menu-toggle .material-symbols-outlined {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  .mobile-menu-toggle:focus-visible {
+    @apply outline-none;
+    box-shadow: 0 0 0 2px rgba(6, 64, 43, 0.24);
+  }
+
+  .mobile-nav-popup {
+    @apply absolute right-0 top-[calc(100%+0.5rem)] w-48 rounded-lg p-2;
+    border: 1px solid rgba(6, 64, 43, 0.22);
+    background: color-mix(in srgb, var(--surface), white 16%);
+    box-shadow: 0 12px 30px rgba(6, 64, 43, 0.15);
+  }
+
+  .mobile-nav-list {
+    @apply space-y-1;
+  }
+
+  .mobile-nav-link {
+    @apply block rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em];
+    color: color-mix(in srgb, var(--ink), white 20%);
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus-visible {
+    @apply outline-none;
+    color: var(--ink);
+    background: rgba(6, 64, 43, 0.1);
+  }
+
+  .mobile-nav-link.is-active {
+    color: var(--ink);
+    background: rgba(6, 64, 43, 0.15);
+  }
+
   .dot-nav {
     @apply fixed right-3 top-1/2 z-40 flex -translate-y-1/2 flex-col gap-3 sm:right-6;
   }

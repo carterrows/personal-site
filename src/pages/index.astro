@@ -242,6 +242,8 @@ const projects = [
 
       const navLinks = Array.from(document.querySelectorAll("[data-nav-target]"));
       const dotLinks = Array.from(document.querySelectorAll("[data-dot-target]"));
+      const mobileNavToggle = document.querySelector("[data-mobile-nav-toggle]");
+      const mobileNav = document.querySelector("[data-mobile-nav]");
       const projectCards = Array.from(document.querySelectorAll("[data-project-card]")).filter(
         (card) => card instanceof HTMLElement
       );
@@ -357,8 +359,60 @@ const projects = [
         goToSection(targetIndex);
       };
 
+      const closeMobileNav = () => {
+        if (!(mobileNav instanceof HTMLElement) || !(mobileNavToggle instanceof HTMLElement)) return;
+        mobileNav.setAttribute("hidden", "");
+        mobileNavToggle.setAttribute("aria-expanded", "false");
+      };
+
+      const toggleMobileNav = () => {
+        if (!(mobileNav instanceof HTMLElement) || !(mobileNavToggle instanceof HTMLElement)) return;
+        const isOpen = !mobileNav.hasAttribute("hidden");
+        if (isOpen) {
+          closeMobileNav();
+        } else {
+          mobileNav.removeAttribute("hidden");
+          mobileNavToggle.setAttribute("aria-expanded", "true");
+        }
+      };
+
+      if (mobileNav instanceof HTMLElement && mobileNavToggle instanceof HTMLElement) {
+        mobileNavToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleMobileNav();
+        });
+
+        mobileNav.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+
+        document.addEventListener("click", () => {
+          if (!mobileNav.hasAttribute("hidden")) {
+            closeMobileNav();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeMobileNav();
+          }
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 640) {
+            closeMobileNav();
+          }
+        });
+      }
+
       navLinks.forEach((link) => {
-        link.addEventListener("click", (event) => linkToSection(event, "data-nav-target"));
+        link.addEventListener("click", (event) => {
+          linkToSection(event, "data-nav-target");
+          const target = event.currentTarget;
+          if (target instanceof HTMLElement && target.closest("[data-mobile-nav]")) {
+            closeMobileNav();
+          }
+        });
       });
 
       dotLinks.forEach((link) => {
