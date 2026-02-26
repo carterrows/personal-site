@@ -1,38 +1,227 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sections = [
+  { id: "about", label: "About", index: "01" },
+  { id: "skills", label: "Skills", index: "02" },
+  { id: "projects", label: "Projects", index: "03" },
+  { id: "work", label: "Work", index: "04" },
+  { id: "contact", label: "Contact", index: "05" }
+];
 ---
 
 <BaseLayout title="Your Name | Personal Site">
-  <section id="home" class="scroll-mt-24 space-y-4">
-    <p class="text-sm uppercase tracking-wider text-cyan-300">Personal Site</p>
-    <h1 class="text-4xl font-bold md:text-5xl">Hi, I'm Your Name.</h1>
-    <p class="max-w-2xl text-slate-300">
-      Replace this with a short introduction. This scaffold is intentionally minimal so we can iterate
-      on final content and styling next.
-    </p>
+  <aside class="dot-nav" aria-label="Section navigation">
+    {
+      sections.map((section) => (
+        <a
+          class="dot-link"
+          data-dot-target={section.id}
+          href={`#${section.id}`}
+          aria-label={section.label}
+        />
+      ))
+    }
+  </aside>
+
+  <section id="about" class="section-panel border-t border-[color:var(--line)]">
+    <div class="section-shell">
+      <p class="section-index">{sections[0].index}</p>
+      <h1 class="section-title">Software engineer building robust, user-focused web products.</h1>
+      <p class="section-copy">
+        I design and ship production-grade full stack applications with a strong focus on clean
+        architecture, performance, and reliability.
+      </p>
+    </div>
   </section>
 
-  <section id="about" class="scroll-mt-24 space-y-4">
-    <h2 class="text-2xl font-semibold">About</h2>
-    <p class="text-slate-300">
-      Add your bio, interests, background, and anything else you want people to know.
-    </p>
-    <img
-      class="h-40 w-40 rounded-xl border border-slate-700 object-cover"
-      src="/images/profile-placeholder.svg"
-      alt="Profile placeholder"
-    />
+  <section id="skills" class="section-panel">
+    <div class="section-shell">
+      <p class="section-index">{sections[1].index}</p>
+      <h2 class="section-title">Skills</h2>
+      <ul class="chip-grid">
+        <li class="chip">TypeScript</li>
+        <li class="chip">React</li>
+        <li class="chip">Astro</li>
+        <li class="chip">Node.js</li>
+        <li class="chip">PostgreSQL</li>
+        <li class="chip">Docker</li>
+        <li class="chip">AWS</li>
+        <li class="chip">CI/CD</li>
+      </ul>
+    </div>
   </section>
 
-  <section id="projects" class="scroll-mt-24 space-y-4">
-    <h2 class="text-2xl font-semibold">Projects</h2>
-    <p class="text-slate-300">
-      This section can later list projects, links, screenshots, or GitHub repositories.
-    </p>
+  <section id="projects" class="section-panel">
+    <div class="section-shell">
+      <p class="section-index">{sections[2].index}</p>
+      <h2 class="section-title">Projects</h2>
+      <div class="card-stack">
+        <article class="info-card">
+          <h3 class="card-title">Project One</h3>
+          <p class="section-copy">High-impact app with measurable product and performance outcomes.</p>
+        </article>
+        <article class="info-card">
+          <h3 class="card-title">Project Two</h3>
+          <p class="section-copy">Automation and internal tooling that reduced operational overhead.</p>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <section id="contact" class="scroll-mt-24 space-y-4">
-    <h2 class="text-2xl font-semibold">Contact</h2>
-    <p class="text-slate-300">Add your preferred contact methods and social links here.</p>
+  <section id="work" class="section-panel">
+    <div class="section-shell">
+      <p class="section-index">{sections[3].index}</p>
+      <h2 class="section-title">Work</h2>
+      <div class="card-stack">
+        <article class="info-card">
+          <p class="section-copy">Senior Software Engineer · Company</p>
+          <p class="section-copy">Led delivery of customer-facing features and platform improvements.</p>
+        </article>
+        <article class="info-card">
+          <p class="section-copy">Software Engineer · Company</p>
+          <p class="section-copy">Built full stack features across frontend and backend services.</p>
+        </article>
+      </div>
+    </div>
   </section>
+
+  <section id="contact" class="section-panel">
+    <div class="section-shell">
+      <p class="section-index">{sections[4].index}</p>
+      <h2 class="section-title">Contact</h2>
+      <p class="section-copy">Email, LinkedIn, and GitHub links go here.</p>
+      <div class="link-row">
+        <a class="action-link" href="mailto:you@example.com">Email</a>
+        <a class="action-link" href="#" rel="noreferrer" target="_blank">LinkedIn</a>
+        <a class="action-link" href="#" rel="noreferrer" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const sectionIds = ["about", "skills", "projects", "work", "contact"];
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((section) => section instanceof HTMLElement);
+
+      if (sections.length === 0) return;
+
+      const navLinks = Array.from(document.querySelectorAll("[data-nav-target]"));
+      const dotLinks = Array.from(document.querySelectorAll("[data-dot-target]"));
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let activeIndex = -1;
+      let isAnimating = false;
+      let releaseTimer = 0;
+      let frame = 0;
+
+      const nearestSectionIndex = () => {
+        let closestIndex = 0;
+        let minDistance = Number.POSITIVE_INFINITY;
+
+        sections.forEach((section, index) => {
+          const distance = Math.abs(section.getBoundingClientRect().top);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        return closestIndex;
+      };
+
+      const setActiveSection = (index) => {
+        if (index === activeIndex) return;
+        activeIndex = index;
+        const activeId = sectionIds[index];
+
+        navLinks.forEach((link) => {
+          const isActive = link.getAttribute("data-nav-target") === activeId;
+          link.classList.toggle("is-active", isActive);
+          if (isActive) {
+            link.setAttribute("aria-current", "page");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+
+        dotLinks.forEach((link) => {
+          const isActive = link.getAttribute("data-dot-target") === activeId;
+          link.classList.toggle("is-active", isActive);
+          link.setAttribute("aria-current", isActive ? "true" : "false");
+        });
+      };
+
+      const goToSection = (index) => {
+        if (index < 0 || index >= sections.length) return;
+        sections[index].scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
+          block: "start"
+        });
+        setActiveSection(index);
+      };
+
+      const linkToSection = (event, attribute) => {
+        const target = event.currentTarget;
+        if (!(target instanceof HTMLElement)) return;
+        event.preventDefault();
+        const sectionId = target.getAttribute(attribute);
+        if (!sectionId) return;
+        const targetIndex = sectionIds.indexOf(sectionId);
+        if (targetIndex < 0) return;
+        goToSection(targetIndex);
+      };
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (event) => linkToSection(event, "data-nav-target"));
+      });
+
+      dotLinks.forEach((link) => {
+        link.addEventListener("click", (event) => linkToSection(event, "data-dot-target"));
+      });
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (frame) return;
+          frame = window.requestAnimationFrame(() => {
+            setActiveSection(nearestSectionIndex());
+            frame = 0;
+          });
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        "wheel",
+        (event) => {
+          if (event.ctrlKey || event.metaKey || event.shiftKey) return;
+          if (Math.abs(event.deltaY) < 8) return;
+          event.preventDefault();
+
+          if (isAnimating) return;
+
+          const currentIndex = nearestSectionIndex();
+          const direction = event.deltaY > 0 ? 1 : -1;
+          const targetIndex = Math.min(
+            sections.length - 1,
+            Math.max(0, currentIndex + direction)
+          );
+
+          if (targetIndex === currentIndex) return;
+
+          isAnimating = true;
+          goToSection(targetIndex);
+          window.clearTimeout(releaseTimer);
+          releaseTimer = window.setTimeout(() => {
+            isAnimating = false;
+          }, reducedMotion ? 160 : 700);
+        },
+        { passive: false }
+      );
+
+      setActiveSection(nearestSectionIndex());
+    })();
+  </script>
 </BaseLayout>
