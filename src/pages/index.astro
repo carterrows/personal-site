@@ -115,20 +115,29 @@ const sections = [
       let isAnimating = false;
       let releaseTimer = 0;
       let frame = 0;
+      let lockedIndex = null;
+      let lockReleaseTimer = 0;
 
-      const nearestSectionIndex = () => {
-        let closestIndex = 0;
-        let minDistance = Number.POSITIVE_INFINITY;
+      const getActiveSectionIndex = () => {
+        const viewportCenter = window.innerHeight * 0.5;
+        let fallbackIndex = 0;
+        let fallbackDistance = Number.POSITIVE_INFINITY;
 
-        sections.forEach((section, index) => {
-          const distance = Math.abs(section.getBoundingClientRect().top);
-          if (distance < minDistance) {
-            minDistance = distance;
-            closestIndex = index;
+        for (let index = 0; index < sections.length; index += 1) {
+          const rect = sections[index].getBoundingClientRect();
+          if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+            return index;
           }
-        });
 
-        return closestIndex;
+          const sectionCenter = rect.top + rect.height * 0.5;
+          const distance = Math.abs(sectionCenter - viewportCenter);
+          if (distance < fallbackDistance) {
+            fallbackDistance = distance;
+            fallbackIndex = index;
+          }
+        }
+
+        return fallbackIndex;
       };
 
       const setActiveSection = (index) => {
@@ -155,6 +164,12 @@ const sections = [
 
       const goToSection = (index) => {
         if (index < 0 || index >= sections.length) return;
+        lockedIndex = index;
+        window.clearTimeout(lockReleaseTimer);
+        lockReleaseTimer = window.setTimeout(() => {
+          lockedIndex = null;
+        }, reducedMotion ? 240 : 1000);
+
         sections[index].scrollIntoView({
           behavior: reducedMotion ? "auto" : "smooth",
           block: "start"
@@ -186,7 +201,20 @@ const sections = [
         () => {
           if (frame) return;
           frame = window.requestAnimationFrame(() => {
-            setActiveSection(nearestSectionIndex());
+            if (lockedIndex !== null) {
+              const targetRect = sections[lockedIndex].getBoundingClientRect();
+              const viewportCenter = window.innerHeight * 0.5;
+              const targetIsCentered =
+                targetRect.top <= viewportCenter && targetRect.bottom >= viewportCenter;
+
+              if (targetIsCentered) {
+                setActiveSection(lockedIndex);
+                lockedIndex = null;
+                window.clearTimeout(lockReleaseTimer);
+              }
+            } else {
+              setActiveSection(getActiveSectionIndex());
+            }
             frame = 0;
           });
         },
@@ -202,7 +230,7 @@ const sections = [
 
           if (isAnimating) return;
 
-          const currentIndex = nearestSectionIndex();
+          const currentIndex = getActiveSectionIndex();
           const direction = event.deltaY > 0 ? 1 : -1;
           const targetIndex = Math.min(
             sections.length - 1,
@@ -221,7 +249,7 @@ const sections = [
         { passive: false }
       );
 
-      setActiveSection(nearestSectionIndex());
+      setActiveSection(getActiveSectionIndex());
     })();
   </script>
 </BaseLayout>

@@ -68,16 +68,23 @@ body::after {
 
 @layer components {
   .top-link {
-    @apply rounded-md px-2 py-1 transition-colors;
-    color: color-mix(in srgb, var(--ink), white 15%);
+    @apply inline-block px-2 py-1;
+    color: color-mix(in srgb, var(--ink), white 28%);
+    border-bottom: 2px solid transparent;
+    transition:
+      color 180ms ease,
+      border-bottom-color 220ms ease;
   }
 
   .top-link:hover,
-  .top-link:focus-visible,
-  .top-link.is-active {
+  .top-link:focus-visible {
     @apply outline-none;
-    background: rgba(6, 64, 43, 0.1);
     color: var(--ink);
+  }
+
+  .top-link.is-active {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
   }
 
   .resume-link {
@@ -96,7 +103,7 @@ body::after {
   }
 
   .dot-link {
-    @apply block h-2.5 w-2.5 rounded-full transition-all;
+    @apply block h-2.5 w-2.5 rounded-full transition-colors;
     background: rgba(6, 64, 43, 0.24);
   }
 
@@ -104,8 +111,10 @@ body::after {
   .dot-link:focus-visible,
   .dot-link.is-active {
     @apply outline-none;
+  }
+
+  .dot-link.is-active {
     background: var(--ink);
-    box-shadow: 0 0 0 4px rgba(6, 64, 43, 0.14);
   }
 
   .section-panel {
