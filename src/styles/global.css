@@ -129,6 +129,14 @@ body::after {
     @apply max-w-3xl space-y-6;
   }
 
+  .about-shell {
+    @apply max-w-5xl items-center gap-10 space-y-0 md:flex md:justify-between;
+  }
+
+  .about-copy {
+    @apply space-y-6;
+  }
+
   .section-index {
     @apply text-xs font-semibold uppercase tracking-[0.3em];
     color: color-mix(in srgb, var(--ink), white 45%);
@@ -142,6 +150,28 @@ body::after {
     @apply max-w-2xl text-sm leading-relaxed sm:text-base;
     font-family: var(--font-blurb);
     color: var(--ink-soft);
+  }
+
+  .about-photo-frame {
+    @apply inline-flex items-center justify-center;
+    width: 16rem;
+    height: 16rem;
+    border-radius: 999px;
+    padding: 0.35rem;
+    border: 1px solid rgba(6, 64, 43, 0.28);
+    background: linear-gradient(
+      145deg,
+      rgba(6, 64, 43, 0.1),
+      rgba(255, 255, 255, 0.56)
+    );
+    box-shadow:
+      0 8px 22px rgba(6, 64, 43, 0.12),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  }
+
+  .about-photo {
+    @apply block h-full w-full rounded-full object-cover;
+    border: 2px solid rgba(6, 64, 43, 0.18);
   }
 
   .chip-grid {

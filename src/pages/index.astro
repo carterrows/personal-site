@@ -25,13 +25,24 @@ const sections = [
   </aside>
 
   <section id="about" class="section-panel border-t border-[color:var(--line)]">
-    <div class="section-shell">
-      <p class="section-index">{sections[0].index}</p>
-      <h1 class="section-title">Software engineer building robust, user-focused web products.</h1>
-      <p class="section-copy">
-        I design and ship production-grade full stack applications with a strong focus on clean
-        architecture, performance, and reliability.
-      </p>
+    <div class="section-shell about-shell">
+      <div class="about-copy">
+        <p class="section-index">{sections[0].index}</p>
+        <h1 class="section-title">Software engineer building robust, user-focused web products.</h1>
+        <p class="section-copy">
+          I design and ship production-grade full stack applications with a strong focus on clean
+          architecture, performance, and reliability.
+        </p>
+      </div>
+      <div class="about-photo-frame">
+        <img
+          class="about-photo"
+          src="/images/profile.jpeg"
+          alt="Portrait of Carter Rows"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
     </div>
   </section>
 
