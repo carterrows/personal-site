@@ -74,6 +74,15 @@ body::after {
 }
 
 @layer components {
+  .site-nav {
+    min-height: 5rem;
+  }
+
+  .site-nav-main {
+    @apply flex items-center gap-4;
+    min-height: 5rem;
+  }
+
   .top-link {
     @apply inline-block px-2 py-1;
     color: color-mix(in srgb, var(--ink), white 28%);
@@ -114,7 +123,7 @@ body::after {
   }
 
   .mobile-menu-toggle .material-symbols-outlined {
-    font-size: 1.75rem;
+    font-size: 2rem;
     line-height: 1;
   }
 
@@ -124,18 +133,16 @@ body::after {
   }
 
   .mobile-nav-popup {
-    @apply absolute right-0 top-[calc(100%+0.5rem)] w-48 rounded-lg p-2;
-    border: 1px solid rgba(6, 64, 43, 0.22);
-    background: color-mix(in srgb, var(--surface), white 16%);
-    box-shadow: 0 12px 30px rgba(6, 64, 43, 0.15);
+    @apply w-full pb-3 pt-1;
   }
 
   .mobile-nav-list {
-    @apply space-y-1;
+    @apply ml-auto flex w-fit min-w-[11rem] flex-col items-stretch gap-1;
   }
 
   .mobile-nav-link {
-    @apply block rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em];
+    @apply block rounded-md px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em];
+    text-align: right;
     color: color-mix(in srgb, var(--ink), white 20%);
     transition: background-color 180ms ease, color 180ms ease;
   }
