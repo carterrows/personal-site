@@ -10,7 +10,7 @@ const sections = [
 ];
 ---
 
-<BaseLayout title="Your Name | Personal Site">
+<BaseLayout title="Carter Rows | Technology Analyst" name="Carter Rows">
   <aside class="dot-nav" aria-label="Section navigation">
     {
       sections.map((section) => (
@@ -28,17 +28,19 @@ const sections = [
     <div class="section-shell about-shell">
       <div class="about-copy">
         <p class="section-index">{sections[0].index}</p>
-        <h1 class="section-title">Software engineer building robust, user-focused web products.</h1>
+        <h1 class="section-title">Computer engineer building AI-driven solutions to complex problems.</h1>
         <p class="section-copy">
-          I design and ship production-grade full stack applications with a strong focus on clean
-          architecture, performance, and reliability.
+          I am a computer engineer who enjoys turning ideas into practical products people can use.
+          I spend most of my time building web apps, automation, and cloud workflows, and I use AI
+          agents like Codex to move from concept to shipped features faster. I care about clean
+          implementation, reliable systems, and continuously improving by building.
         </p>
       </div>
       <div class="about-photo-frame">
         <img
           class="about-photo"
           src="/images/profile.jpeg"
-          alt="Portrait of Carter Rows"
+          alt="carter-rows"
           loading="eager"
           decoding="async"
         />
@@ -51,14 +53,20 @@ const sections = [
       <p class="section-index">{sections[1].index}</p>
       <h2 class="section-title">Skills</h2>
       <ul class="chip-grid">
-        <li class="chip">TypeScript</li>
+        <li class="chip">Next.js</li>
         <li class="chip">React</li>
-        <li class="chip">Astro</li>
-        <li class="chip">Node.js</li>
-        <li class="chip">PostgreSQL</li>
+        <li class="chip">TypeScript/JavaScript</li>
+        <li class="chip">Python</li>
+        <li class="chip">C</li>
+        <li class="chip">Java</li>
+        <li class="chip">HTML/CSS</li>
+        <li class="chip">SQL</li>
         <li class="chip">Docker</li>
         <li class="chip">AWS</li>
-        <li class="chip">CI/CD</li>
+        <li class="chip">Azure</li>
+        <li class="chip">Git</li>
+        <li class="chip">Agile Development</li>
+        <li class="chip">Jira</li>
       </ul>
     </div>
   </section>
@@ -69,12 +77,32 @@ const sections = [
       <h2 class="section-title">Projects</h2>
       <div class="card-stack">
         <article class="info-card">
-          <h3 class="card-title">Project One</h3>
-          <p class="section-copy">High-impact app with measurable product and performance outcomes.</p>
+          <h3 class="card-title">Budget Tool</h3>
+          <p class="section-copy">Personal Project · February 2026</p>
+          <ul class="section-copy list-disc pl-5">
+            <li>Built a self-hosted budgeting app with authenticated accounts and server-side sessions.</li>
+            <li>Designed multi-plan budgeting workflows with autosave and monthly cash-flow projections.</li>
+            <li>Strengthened API security with origin and host checks, strict headers, and rate limiting.</li>
+            <li>Containerized deployment using Docker.</li>
+          </ul>
         </article>
         <article class="info-card">
-          <h3 class="card-title">Project Two</h3>
-          <p class="section-copy">Automation and internal tooling that reduced operational overhead.</p>
+          <h3 class="card-title">Sweetside Band Website</h3>
+          <p class="section-copy">Personal Project · January 2026</p>
+          <ul class="section-copy list-disc pl-5">
+            <li>Built a responsive website for a local band with reusable UI components.</li>
+            <li>Implemented a JSON-driven content system for details, shows, members, and media.</li>
+            <li>Containerized deployment using Docker.</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h3 class="card-title">vCard Management System</h3>
+          <p class="section-copy">Software System Development and Integration · Winter 2025</p>
+          <ul class="section-copy list-disc pl-5">
+            <li>Developed a C library to parse and validate vCard files according to RFC 6350.</li>
+            <li>Built a Python GUI to display, edit, and export vCard data with SQLite persistence.</li>
+            <li>Implemented end-to-end data flow with robust memory management and error handling.</li>
+          </ul>
         </article>
       </div>
     </div>
@@ -86,12 +114,24 @@ const sections = [
       <h2 class="section-title">Work</h2>
       <div class="card-stack">
         <article class="info-card">
-          <p class="section-copy">Senior Software Engineer · Company</p>
-          <p class="section-copy">Led delivery of customer-facing features and platform improvements.</p>
+          <h3 class="card-title">Technology Summer Analyst · Accenture</h3>
+          <p class="section-copy">Toronto, ON · June 2025 - Aug 2025</p>
+          <ul class="section-copy list-disc pl-5">
+            <li>Reduced Azure cloud costs through log restructuring, SQL optimization, VM rightsizing, and platform recommendations.</li>
+            <li>Built Power BI dashboards tied to Azure Cost Management with automated refresh, MTD filtering, and component-level breakdowns.</li>
+            <li>Developed PowerShell audits for aged multi-tenant Azure resources and automated reporting exports.</li>
+            <li>Implemented a Logic Apps workflow to autoscale Microsoft Fabric capacity and cut off-hours spend.</li>
+          </ul>
         </article>
         <article class="info-card">
-          <p class="section-copy">Software Engineer · Company</p>
-          <p class="section-copy">Built full stack features across frontend and backend services.</p>
+          <h3 class="card-title">Network Operations · Halton District School Board</h3>
+          <p class="section-copy">Burlington, ON · May 2023 - Sept 2024</p>
+          <ul class="section-copy list-disc pl-5">
+            <li>Installed and configured network hardware, including switches and access points, across schools.</li>
+            <li>Diagnosed and resolved network and system issues on board-managed devices.</li>
+            <li>Created detailed switch topology documentation to improve infrastructure clarity and maintenance.</li>
+            <li>Improved network reliability across over 100 schools to support day-to-day operations.</li>
+          </ul>
         </article>
       </div>
     </div>
