@@ -169,18 +169,26 @@ body::after {
   }
 
   .link-row {
-    @apply flex flex-wrap gap-2;
+    @apply flex flex-wrap items-center gap-4;
   }
 
-  .action-link {
-    @apply rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition-colors sm:text-sm;
-    border: 1px solid var(--ink);
-    color: var(--ink);
+  .icon-link {
+    @apply inline-flex items-center justify-center transition;
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
   }
 
-  .action-link:hover,
-  .action-link:focus-visible {
+  .icon-link:hover,
+  .icon-link:focus-visible {
     @apply outline-none;
-    background: rgba(6, 64, 43, 0.1);
+    opacity: 0.7;
+    transform: translateY(-1px);
+  }
+
+  .contact-icon {
+    @apply block;
+    width: 1.85rem;
+    height: 1.85rem;
   }
 }
