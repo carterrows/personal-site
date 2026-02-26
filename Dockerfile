@@ -20,5 +20,7 @@ COPY package.json package-lock.json ./
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm prune --omit=dev
 COPY --from=builder /app/dist ./dist
+COPY private ./private
 EXPOSE 4321
+USER node
 CMD ["node", "dist/server/entry.mjs"]
