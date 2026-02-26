@@ -75,7 +75,7 @@ export async function GET(context: APIContext): Promise<Response> {
     status: 302,
     headers: {
       "cache-control": "no-store",
-      location: new URL("/resume.pdf", context.url).toString()
+      location: new URL("/Rows_Carter_Resume.pdf", context.url).toString()
     }
   });
 }

@@ -20,9 +20,9 @@ Site will be available at `http://localhost:4321`.
 
 ## Resume download
 
-- Place your resume at `public/resume.pdf`.
+- Place your resume at `public/Rows_Carter_Resume.pdf`.
 - Resume button links to `/api/resume`.
-- `/api/resume` applies an in-memory rate limit (5 requests/minute per IP) and then redirects to `resume.pdf`.
+- `/api/resume` applies an in-memory rate limit (5 requests/minute per IP) and then redirects to `Rows_Carter_Resume.pdf`.
 
 ## Project structure
 
@@ -34,7 +34,7 @@ Site will be available at `http://localhost:4321`.
 ├── tailwind.config.cjs
 ├── postcss.config.cjs
 ├── public
-│   ├── resume.pdf            # add this file yourself
+│   ├── Rows_Carter_Resume.pdf # add this file yourself
 │   ├── images
 │   └── icons
 └── src
