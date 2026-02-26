@@ -188,7 +188,7 @@ body::after {
 
   .contact-icon {
     @apply block;
-    width: 1.85rem;
-    height: 1.85rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
