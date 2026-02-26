@@ -251,28 +251,23 @@ body::after {
   }
 
   .project-arrow {
-    @apply inline-flex h-10 w-10 items-center justify-center rounded-full transition;
+    @apply inline-flex items-center justify-center p-0;
     flex-shrink: 0;
     color: var(--ink);
-    border: 1px solid rgba(6, 64, 43, 0.24);
-    background: rgba(255, 255, 255, 0.55);
+    border: 0;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
   }
 
   .project-arrow .material-symbols-outlined {
     @apply block;
-    font-size: 1.2rem;
+    font-size: 3rem;
     line-height: 1;
   }
 
   .project-arrow[data-project-prev] .material-symbols-outlined {
     transform: translateX(2px);
-  }
-
-  .project-arrow:hover,
-  .project-arrow:focus-visible {
-    @apply outline-none;
-    opacity: 0.75;
-    transform: translateY(-1px);
   }
 
   .project-progress {
@@ -284,11 +279,6 @@ body::after {
   @media (max-width: 640px) {
     .project-frame {
       gap: 0.75rem;
-    }
-
-    .project-arrow {
-      height: 2.25rem;
-      width: 2.25rem;
     }
   }
 
