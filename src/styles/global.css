@@ -136,6 +136,10 @@ body::after {
     @apply mx-auto max-w-3xl space-y-6;
   }
 
+  .work-shell {
+    @apply max-w-6xl;
+  }
+
   .about-shell {
     @apply max-w-5xl items-center gap-10 space-y-0 md:flex md:justify-between;
   }
@@ -192,7 +196,7 @@ body::after {
   }
 
   .card-stack {
-    @apply grid gap-3 sm:grid-cols-2;
+    @apply grid gap-3 sm:grid-cols-3;
   }
 
   .project-carousel {
