@@ -74,6 +74,15 @@ body::after {
 }
 
 @layer components {
+  .site-nav {
+    min-height: 5rem;
+  }
+
+  .site-nav-main {
+    @apply flex items-center gap-4;
+    min-height: 5rem;
+  }
+
   .top-link {
     @apply inline-block px-2 py-1;
     color: color-mix(in srgb, var(--ink), white 28%);
@@ -103,6 +112,51 @@ body::after {
   .resume-link:focus-visible {
     @apply outline-none;
     background: rgba(6, 64, 43, 0.12);
+  }
+
+  .mobile-menu-toggle {
+    @apply inline-flex items-center justify-center p-0;
+    color: var(--ink);
+    border: 0;
+    background: transparent;
+    appearance: none;
+  }
+
+  .mobile-menu-toggle .material-symbols-outlined {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .mobile-menu-toggle:focus-visible {
+    @apply outline-none;
+    box-shadow: 0 0 0 2px rgba(6, 64, 43, 0.24);
+  }
+
+  .mobile-nav-popup {
+    @apply w-full pb-3 pt-1;
+  }
+
+  .mobile-nav-list {
+    @apply ml-auto flex w-fit min-w-[11rem] flex-col items-stretch gap-1;
+  }
+
+  .mobile-nav-link {
+    @apply block rounded-md px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em];
+    text-align: right;
+    color: color-mix(in srgb, var(--ink), white 20%);
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus-visible {
+    @apply outline-none;
+    color: var(--ink);
+    background: rgba(6, 64, 43, 0.1);
+  }
+
+  .mobile-nav-link.is-active {
+    color: var(--ink);
+    background: rgba(6, 64, 43, 0.15);
   }
 
   .dot-nav {
