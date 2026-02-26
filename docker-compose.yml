@@ -8,5 +8,9 @@ services:
     environment:
       HOST: 0.0.0.0
       PORT: 4321
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     ports:
-      - "4321:4321"
+      - "127.0.0.1:4321:4321"
