@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,6 +39,14 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 body::before {
@@ -126,7 +133,7 @@ body::after {
   }
 
   .section-shell {
-    @apply max-w-3xl space-y-6;
+    @apply mx-auto max-w-3xl space-y-6;
   }
 
   .about-shell {
@@ -188,12 +195,24 @@ body::after {
     @apply grid gap-3 sm:grid-cols-2;
   }
 
-  .project-grid {
-    @apply grid gap-6 md:grid-cols-2;
+  .project-carousel {
+    @apply space-y-4;
+  }
+
+  .project-frame {
+    @apply grid items-center gap-3;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .project-viewport {
+    @apply min-w-0;
+    width: min(100%, 50rem);
+    margin-inline: auto;
   }
 
   .project-card {
     @apply overflow-hidden rounded-xl;
+    width: 100%;
     background: rgba(255, 255, 255, 0.52);
     border: 1px solid rgba(6, 64, 43, 0.2);
     box-shadow: 0 10px 28px rgba(6, 64, 43, 0.08);
@@ -229,6 +248,48 @@ body::after {
     @apply block;
     width: 1.25rem;
     height: 1.25rem;
+  }
+
+  .project-arrow {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full transition;
+    flex-shrink: 0;
+    color: var(--ink);
+    border: 1px solid rgba(6, 64, 43, 0.24);
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .project-arrow .material-symbols-outlined {
+    @apply block;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .project-arrow[data-project-prev] .material-symbols-outlined {
+    transform: translateX(2px);
+  }
+
+  .project-arrow:hover,
+  .project-arrow:focus-visible {
+    @apply outline-none;
+    opacity: 0.75;
+    transform: translateY(-1px);
+  }
+
+  .project-progress {
+    @apply min-w-[4rem] text-center text-sm;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+  }
+
+  @media (max-width: 640px) {
+    .project-frame {
+      gap: 0.75rem;
+    }
+
+    .project-arrow {
+      height: 2.25rem;
+      width: 2.25rem;
+    }
   }
 
   .info-card {
