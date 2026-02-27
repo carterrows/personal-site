@@ -30,7 +30,6 @@ Site will be available at `http://localhost:4321`.
 - Place your resume at `private/Rows_Carter_Resume.pdf`.
 - Resume button links to `/api/resume`.
 - `/api/resume` applies an in-memory rate limit (5 requests/minute per IP) and serves the PDF directly, so the file is not publicly addressable.
-- `private/*.pdf` is gitignored to avoid accidentally committing private documents.
 
 ## Project structure
 
