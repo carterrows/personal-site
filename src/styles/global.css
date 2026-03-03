@@ -85,7 +85,7 @@ body::after {
 
   .top-link {
     @apply inline-block px-2 py-1;
-    color: color-mix(in srgb, var(--ink), white 28%);
+    color: color-mix(in srgb, var(--bg), transparent 14%);
     border-bottom: 2px solid transparent;
     transition:
       color 180ms ease,
@@ -95,28 +95,28 @@ body::after {
   .top-link:hover,
   .top-link:focus-visible {
     @apply outline-none;
-    color: var(--ink);
+    color: var(--bg);
   }
 
   .top-link.is-active {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
+    color: var(--bg);
+    border-bottom-color: var(--bg);
   }
 
   .resume-link {
     @apply rounded-md px-2 py-1 transition-colors;
-    color: var(--ink);
+    color: var(--bg);
   }
 
   .resume-link:hover,
   .resume-link:focus-visible {
     @apply outline-none;
-    background: rgba(6, 64, 43, 0.12);
+    background: rgba(248, 244, 232, 0.18);
   }
 
   .mobile-menu-toggle {
     @apply inline-flex items-center justify-center p-0;
-    color: var(--ink);
+    color: var(--bg);
     border: 0;
     background: transparent;
     appearance: none;
@@ -129,11 +129,12 @@ body::after {
 
   .mobile-menu-toggle:focus-visible {
     @apply outline-none;
-    box-shadow: 0 0 0 2px rgba(6, 64, 43, 0.24);
+    box-shadow: 0 0 0 2px rgba(248, 244, 232, 0.32);
   }
 
   .mobile-nav-popup {
     @apply w-full pb-3 pt-1;
+    background: linear-gradient(120deg, #06402b 0%, #0a5a3d 55%, #06402b 100%);
   }
 
   .mobile-nav-list {
@@ -143,20 +144,20 @@ body::after {
   .mobile-nav-link {
     @apply block rounded-md px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em];
     text-align: right;
-    color: color-mix(in srgb, var(--ink), white 20%);
+    color: color-mix(in srgb, var(--bg), transparent 12%);
     transition: background-color 180ms ease, color 180ms ease;
   }
 
   .mobile-nav-link:hover,
   .mobile-nav-link:focus-visible {
     @apply outline-none;
-    color: var(--ink);
-    background: rgba(6, 64, 43, 0.1);
+    color: var(--bg);
+    background: rgba(248, 244, 232, 0.14);
   }
 
   .mobile-nav-link.is-active {
-    color: var(--ink);
-    background: rgba(6, 64, 43, 0.15);
+    color: var(--bg);
+    background: rgba(248, 244, 232, 0.2);
   }
 
   .dot-nav {
