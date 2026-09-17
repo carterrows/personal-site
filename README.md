@@ -38,7 +38,6 @@ Site will be available at `http://localhost:4321`.
 ├── Dockerfile
 ├── docker-compose.yml
 ├── astro.config.mjs
-├── tailwind.config.cjs
 ├── postcss.config.cjs
 ├── public
 │   ├── images
